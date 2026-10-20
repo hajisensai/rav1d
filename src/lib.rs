@@ -1,4 +1,9 @@
-#![cfg_attr(target_arch = "arm", feature(stdarch_arm_feature_detection))]
+// Fushi: only the asm feature uses is_arm_feature_detected!, so a 32-bit arm
+// build without asm must not need the nightly-only feature gate.
+#![cfg_attr(
+    all(feature = "asm", target_arch = "arm"),
+    feature(stdarch_arm_feature_detection)
+)]
 #![cfg_attr(
     any(target_arch = "riscv32", target_arch = "riscv64"),
     feature(stdarch_riscv_feature_detection)
